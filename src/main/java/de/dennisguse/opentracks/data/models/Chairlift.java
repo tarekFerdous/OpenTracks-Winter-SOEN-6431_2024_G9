@@ -199,6 +199,7 @@ public class Chairlift {
      * @param trackPoints The list of track points.
      * @return The total travel time in minutes.
      */
+
     private double calculateTotalTravelTime(List<TrackPoint> trackPoints) {
         Duration totalDuration = Duration.ZERO;
         for (int i = 1; i < trackPoints.size(); i++) {

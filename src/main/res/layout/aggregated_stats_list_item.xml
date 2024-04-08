@@ -204,13 +204,40 @@
         app:layout_constraintTop_toBottomOf="@+id/aggregated_stats_max_rate"
         tools:text="@string/stats_max_speed" />
 
+<!--    This is for the Time duration on skiing-->
+    <TextView
+        android:id="@+id/totalSkiingDurationTextView"
+        style="@style/TextAppearance.OpenTracks.SecondaryValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/aggregated_stats_avg_rate_label"
+        tools:text="00:00:00"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/aggregatedStatsSkiingDurationLabel"
+        style="@style/TextAppearance.OpenTracks.SecondaryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/totalSkiingDurationTextView"
+        tools:text="Total time skiing"
+        android:visibility="gone"
+        />
+
     <View
         android:id="@+id/aggregated_stats_horizontal_line"
         style="@style/HorizontalLine"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/aggregated_stats_slope_percent_label" />
+        app:layout_constraintTop_toBottomOf="@id/aggregatedStatsSkiingDurationLabel" />
 
     <Button
         android:id="@+id/list_of_seasons_btn234"

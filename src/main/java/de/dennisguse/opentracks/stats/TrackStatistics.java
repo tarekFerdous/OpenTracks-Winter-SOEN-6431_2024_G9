@@ -22,6 +22,10 @@ import androidx.annotation.VisibleForTesting;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.dennisguse.opentracks.data.models.Altitude;
 import de.dennisguse.opentracks.data.models.Distance;
@@ -426,6 +430,88 @@ public class TrackStatistics {
     public boolean hasSlope() {
         return slopePercent_m != null;
     }
+
+
+
+
+
+    private List<TrackPoint> filterRecentTrackPoints(TrackPoint currentTrackPoint) {
+        List<TrackPoint> recentTrackPoints = new ArrayList<>();
+        Instant currentTime = currentTrackPoint.getTime();
+        for (TrackPoint point : trackPoints) {
+            Instant pointTime = point.getTime();
+            Duration timeDifference = Duration.between(pointTime, currentTime);
+            if (!timeDifference.isNegative() && timeDifference.getSeconds() <= 20) {
+                recentTrackPoints.add(point);
+            }
+        }
+        return recentTrackPoints;
+    }
+    TrackPoint previousPoint = points.get(0);
+        for (int i = 1; i < points.size(); i++) {
+        TrackPoint currentPoint = points.get(i);
+    private List<TrackPoint> trackPoints = filterRecentTrackPoints();
+
+    // Constructor
+
+
+    // Method to calculate the total skiing duration for the current day
+    public Duration getTotalSkiingDuration() {
+        return getTotalSkiingDuration(LocalDate.now());
+    }
+
+    // Method to calculate the total skiing duration for a specific date
+    public Duration getTotalSkiingDuration(LocalDate date) {
+        Duration totalSkiingDuration = Duration.ZERO;
+
+        // Iterate through the track points to find skiing segments
+        for (int i = 1; i < trackPoints.size(); i++) {
+            TrackPoint previousPoint = trackPoints.get(i - 1);
+            TrackPoint currentPoint = trackPoints.get(i);
+
+            // Check if skiing is detected between these two points and on the specified date
+            if (isSkiingSegment(previousPoint, currentPoint) && isSameDate(currentPoint.getTime(), date)) {
+                totalSkiingDuration = totalSkiingDuration.plus(Duration.between(previousPoint.getTime(), currentPoint.getTime()));
+            }
+        }
+
+        return totalSkiingDuration;
+    }
+
+    // Method to determine if skiing is detected between two track points
+    private boolean isSkiingSegment(TrackPoint startPoint, TrackPoint endPoint) {
+        // Thresholds to determine skiing activity
+        double altitudeChangeThreshold = 10.0; // Meters
+        double speedThreshold = 5.0; // Meters per second
+        long timeThresholdInSeconds = 50; // Seconds
+
+        // Check if altitude change is significant
+        double altitudeChange = Math.abs(startPoint.getAltitude().toM() - endPoint.getAltitude().toM());
+        if (altitudeChange < altitudeChangeThreshold) {
+            return false; // Altitude change not significant, likely not skiing
+        }
+
+        // Calculate total distance
+//        double totalDistance = startPoint.distanceTo(endPoint).toKM();
+
+        // Calculate total time (in seconds)
+        long totalTimeInSeconds = Duration.between(startPoint.getTime(), endPoint.getTime()).getSeconds();
+
+        // Calculate average speed
+//        double averageSpeed = totalDistance / totalTimeInSeconds;
+
+        // Check if average speed is above the speed threshold
+        return totalTimeInSeconds >= timeThresholdInSeconds;
+    }
+
+    // Method to check if two Instant objects belong to the same LocalDate
+    private boolean isSameDate(Instant instant, LocalDate date) {
+        return instant.atZone(ZoneId.systemDefault()).toLocalDate().isEqual(date);
+    }
+
+
+
+
 
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public void addTotalAltitudeLoss(float loss_m) {

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +19,12 @@ import de.dennisguse.opentracks.R;
 import de.dennisguse.opentracks.data.models.ActivityType;
 import de.dennisguse.opentracks.data.models.DistanceFormatter;
 import de.dennisguse.opentracks.data.models.SpeedFormatter;
+import de.dennisguse.opentracks.data.models.TrackPoint;
 import de.dennisguse.opentracks.databinding.AggregatedStatsListItemBinding;
 import de.dennisguse.opentracks.settings.PreferencesUtils;
 import de.dennisguse.opentracks.settings.UnitSystem;
 import de.dennisguse.opentracks.ui.aggregatedStatistics.SeasonStats.SeasonStatActivity;
+import de.dennisguse.opentracks.ui.aggregatedStatistics.daySpecificStats.DailySkiStatistics;
 import de.dennisguse.opentracks.ui.aggregatedStatistics.daySpecificStats.DaySpecificActivity;
 import de.dennisguse.opentracks.util.StringUtils;
 
@@ -194,7 +197,28 @@ public class AggregatedStatisticsAdapter extends RecyclerView.Adapter<RecyclerVi
                 viewBinding.aggregatedStatsSlopePercentUnit.setText("%");
             }
 
+//            for the time duration of skiing
+            if (activityType.equals("skiing")){
+
+                viewBinding.totalSkiingDurationTextView.setVisibility(View.VISIBLE);
+                viewBinding.aggregatedStatsSkiingDurationLabel.setVisibility(View.VISIBLE);
+
+                if (aggregatedStatistic.getTrackStatistics().getTotalSkiingDuration() == null) {
+                    viewBinding.totalSkiingDurationTextView.setText("00:00:00");
+                } else {
+                    viewBinding.totalSkiingDurationTextView.setText(String.valueOf(aggregatedStatistic.getTrackStatistics().getTotalSkiingDuration()));
+                }
+            }
+
+
+
+
         }
+
+
+
+
+
 
         private int getIcon(AggregatedStatistics.AggregatedStatistic aggregatedStatistic) {
             String localizedActivityType = aggregatedStatistic.getActivityTypeLocalized();
