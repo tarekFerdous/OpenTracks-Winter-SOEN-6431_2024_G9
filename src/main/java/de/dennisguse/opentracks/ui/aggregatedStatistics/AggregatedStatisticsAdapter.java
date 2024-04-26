@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,6 +193,18 @@ public class AggregatedStatisticsAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
                 viewBinding.aggregatedStatsSlopePercentLabel.setText("Average Slope %");
                 viewBinding.aggregatedStatsSlopePercentUnit.setText("%");
+            }
+
+            if (activityType.equals("skiing")){
+                viewBinding.aggregatedStatsChairliftLabel.setVisibility(View.VISIBLE);
+                viewBinding.aggregatedStatsChairliftTime.setVisibility(View.VISIBLE);
+
+                if (aggregatedStatistic.getTrackStatistics().getTotalChairliftTime() == Duration.ZERO) {
+                    viewBinding.aggregatedStatsChairliftTime.setText("0");
+                } else {
+                    viewBinding.aggregatedStatsChairliftTime.setText(String.valueOf(aggregatedStatistic.getTrackStatistics().getTotalChairliftTime()));
+                }
+                viewBinding.aggregatedStatsChairliftLabel.setText("TOTAL CHAIRLIFT TIME");
             }
 
         }

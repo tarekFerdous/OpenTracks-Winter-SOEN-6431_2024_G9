@@ -272,4 +272,36 @@
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/calendar_button" />
 
+    <TextView
+        android:id="@+id/aggregated_stats_chairlift_time"
+        style="@style/TextAppearance.OpenTracks.SecondaryValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/aggregated_stats_chairlift_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/aggregated_stats_chairlift_unit"
+        tools:text="70" />
+
+    <TextView
+        android:id="@+id/aggregated_stats_chairlift_unit"
+        style="@style/TextAppearance.OpenTracks.PrimaryUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/aggregated_stats_chairlift_time"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toEndOf="@+id/aggregated_stats_chairlift_time"
+        tools:text="mins" />
+
+    <TextView
+        android:id="@+id/aggregated_stats_chairlift_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chairlift time"
+        style="@style/TextAppearance.OpenTracks.SecondaryHeader"
+        app:layout_constraintTop_toBottomOf="@+id/aggregated_stats_chairlift_time"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toEndOf="@id/guideline2"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

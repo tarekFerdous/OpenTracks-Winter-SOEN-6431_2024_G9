@@ -39,6 +39,24 @@ public class Chairlift {
         this.id = nextId++;
     }
 
+    public Chairlift() {
+
+    }
+
+    public Duration getTotalChairliftTime(List<TrackPoint> trackPoints) {
+        if (trackPoints==null){
+            return Duration.ZERO;
+        }
+        Duration totalDuration = Duration.ZERO;
+        for (int i = 1; i < trackPoints.size(); i++) {
+            TrackPoint previousPoint = trackPoints.get(i - 1);
+            TrackPoint currentPoint = trackPoints.get(i);
+            Duration rideDuration = Duration.between(previousPoint.getTime(), currentPoint.getTime());
+            totalDuration = totalDuration.plus(rideDuration);
+        }
+        return totalDuration;
+    }
+
     // Getters and setters
 
     /**
