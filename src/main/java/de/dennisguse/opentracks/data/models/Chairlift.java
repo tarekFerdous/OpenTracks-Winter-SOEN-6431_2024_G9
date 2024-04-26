@@ -27,6 +27,10 @@ public class Chairlift {
         this.id = nextId++;
     }
 
+    public Chairlift() {
+
+    }
+
     // Getters and setters
     public String getName() {
         return name;
@@ -137,7 +141,19 @@ public class Chairlift {
         return totalDistance / totalTime;
     }
 
-
+    public Duration getTotalChairliftTime(List<TrackPoint> trackPoints) {
+        if (trackPoints==null){
+            return Duration.ZERO;
+        }
+        Duration totalDuration = Duration.ZERO;
+        for (int i = 1; i < trackPoints.size(); i++) {
+            TrackPoint previousPoint = trackPoints.get(i - 1);
+            TrackPoint currentPoint = trackPoints.get(i);
+            Duration rideDuration = Duration.between(previousPoint.getTime(), currentPoint.getTime());
+            totalDuration = totalDuration.plus(rideDuration);
+        }
+        return totalDuration;
+    }
 
     public static List<Chairlift> getValidChairlifts() {
         return new ArrayList<>(validChairlifts.values());

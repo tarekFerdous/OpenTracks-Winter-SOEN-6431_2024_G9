@@ -257,19 +257,21 @@
     <View
         android:id="@+id/day_stats_horizontal_line"
         style="@style/HorizontalLine"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@id/guideline1"
+        android:layout_marginTop="204dp"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/aggregatedStatsSkiingDurationLabel" />
 
     <Button
         android:id="@+id/list_of_seasons_btn234"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Seasons"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aggregated_stats_horizontal_line" />
 
@@ -311,13 +313,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/runs_and_lifts_button_horizontal_line" />
 
+    <View
+        android:id="@+id/day_statistics_btn_horizontal_line"
+        style="@style/HorizontalLine"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/list_of_seasons_btn234" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="TextView"-->
+<!--        tools:layout_editor_absoluteX="160dp"-->
+<!--        tools:layout_editor_absoluteY="188dp"-->
+<!--        tools:text="@tools:sample/us_zipcodes" />-->
+
+    <!-- ChairLift -->
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/aggregated_stats_chairlift_time"
+        style="@style/TextAppearance.OpenTracks.SecondaryValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="188dp"
-        tools:text="@tools:sample/us_zipcodes" />
+        app:layout_constraintEnd_toStartOf="@+id/aggregated_stats_chairlift_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/aggregated_stats_chairlift_unit"
+        tools:text="70" />
+
+    <TextView
+        android:id="@+id/aggregated_stats_chairlift_unit"
+        style="@style/TextAppearance.OpenTracks.PrimaryUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/aggregated_stats_chairlift_time"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toEndOf="@+id/aggregated_stats_chairlift_time"
+        tools:text="mins" />
+
+    <TextView
+        android:id="@+id/aggregated_stats_chairlift_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chairlift time"
+        style="@style/TextAppearance.OpenTracks.SecondaryHeader"
+        app:layout_constraintTop_toBottomOf="@+id/aggregated_stats_chairlift_time"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toEndOf="@id/guideline2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

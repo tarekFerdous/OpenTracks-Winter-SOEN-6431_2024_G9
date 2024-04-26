@@ -22,8 +22,10 @@ import androidx.annotation.VisibleForTesting;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 
 import de.dennisguse.opentracks.data.models.Altitude;
+import de.dennisguse.opentracks.data.models.Chairlift;
 import de.dennisguse.opentracks.data.models.Distance;
 import de.dennisguse.opentracks.data.models.HeartRate;
 import de.dennisguse.opentracks.data.models.Speed;
@@ -525,6 +527,14 @@ public class TrackStatistics {
         if (!(o instanceof TrackStatistics)) return false;
 
         return toString().equals(o.toString());
+    }
+
+    Chairlift chairlift = new Chairlift(); // or use an existing instance
+    List<TrackPoint> trackPoints;
+    Duration totalChairliftTime = chairlift.getTotalChairliftTime(trackPoints);
+
+    public Duration getTotalChairliftTime() {
+        return totalChairliftTime;
     }
 
     @NonNull

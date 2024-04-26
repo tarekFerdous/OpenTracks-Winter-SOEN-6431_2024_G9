@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,6 @@ import de.dennisguse.opentracks.settings.UnitSystem;
 import de.dennisguse.opentracks.stats.EnhancedTrackStatistics;
 import de.dennisguse.opentracks.ui.aggregatedStatistics.SeasonStats.SeasonStatActivity;
 import de.dennisguse.opentracks.ui.aggregatedStatistics.daySpecificStats.DaySpecificActivity;
-import de.dennisguse.opentracks.ui.aggregatedStatistics.daystatistics.DayStatisticsActivity;
 import de.dennisguse.opentracks.util.StringUtils;
 
 public class AggregatedStatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -209,6 +209,18 @@ public class AggregatedStatisticsAdapter extends RecyclerView.Adapter<RecyclerVi
 //                    System.out.println(enhancedTrackStatistics.getTimeOnChairlift());
                     viewBinding.totalSkiingDurationTextView.setText(String.valueOf(aggregatedStatistic.getTrackStatistics().getSkiingDuration().getSeconds()));
                 }
+            }
+
+            if (activityType.equals("skiing")){
+                viewBinding.aggregatedStatsChairliftLabel.setVisibility(View.VISIBLE);
+                viewBinding.aggregatedStatsChairliftTime.setVisibility(View.VISIBLE);
+
+                if (aggregatedStatistic.getTrackStatistics().getTotalChairliftTime() == Duration.ZERO) {
+                    viewBinding.aggregatedStatsChairliftTime.setText("0");
+                } else {
+                    viewBinding.aggregatedStatsChairliftTime.setText(String.valueOf(aggregatedStatistic.getTrackStatistics().getTotalChairliftTime()));
+                }
+                viewBinding.aggregatedStatsChairliftLabel.setText("TOTAL CHAIRLIFT TIME");
             }
         }
 
